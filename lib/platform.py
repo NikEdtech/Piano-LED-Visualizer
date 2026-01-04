@@ -253,6 +253,8 @@ class PlatformRasp(PlatformBase):
             return False
 
     def manage_hotspot(self, hotspot, usersettings, midiports, first_run=False, current_time=None):
+        if os.getenv("PLV_DISABLE_NETWORK") == "1":
+            return
         if first_run:
             self.create_hotspot_profile()
             if int(usersettings.get("is_hotspot_active")):
